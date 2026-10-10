@@ -1,0 +1,24 @@
+{
+  "name": "notebook-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium custom notebook & stationery e-commerce platform (backend monorepo)",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "npm run build -w @nb/shared && npm run build -w @nb/api",
+    "dev": "npm run build -w @nb/shared && npm run dev -w @nb/api",
+    "start": "npm run start -w @nb/api",
+    "test": "npm run test -w @nb/api",
+    "typecheck": "npm run build -w @nb/shared && npm run typecheck -w @nb/api",
+    "prisma:generate": "npm run prisma:generate -w @nb/api",
+    "db:setup": "npm run db:setup -w @nb/api",
+    "db:seed": "npm run db:seed -w @nb/api"
+  }
+}
