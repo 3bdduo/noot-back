@@ -145,7 +145,7 @@ export class CartService {
       if (res.ok) {
         discount = res.discount;
         couponInfo = { code: cart.couponCode, discount };
-      } else {
+      } else if (res.ok === false) {
         couponError = { code: res.code, params: res.params };
       }
     }
@@ -371,7 +371,7 @@ export class CartService {
     if (priced.length === 0) throw AppError.unprocessable('CART_EMPTY');
 
     const { coupon, result } = await this.coupons.evaluate(code, priced, { userId: actor.userId });
-    if (!result.ok) throw AppError.unprocessable(result.code, result.params);
+    if (result.ok === false) throw AppError.unprocessable(result.code, result.params);
 
     await this.prisma.cart.update({ where: { id: cart.id }, data: { couponCode: coupon.code } });
     return this.view(actor, locale);

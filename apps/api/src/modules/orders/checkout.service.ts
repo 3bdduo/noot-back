@@ -103,7 +103,7 @@ export class CheckoutService {
     const wantedCode = body.couponCode ?? cartRow.couponCode;
     if (wantedCode) {
       const { coupon, result } = await this.coupons.evaluate(wantedCode, priced, { userId: actor.userId, email: contactEmail });
-      if (!result.ok) throw AppError.unprocessable(result.code, result.params);
+      if (result.ok === false) throw AppError.unprocessable(result.code, result.params);
       discount = result.discount;
       couponId = coupon.id;
       couponCode = coupon.code;
