@@ -57,7 +57,7 @@ describe('customization engine', () => {
       ['f2',{id:'f2',status:'READY',groupId:'g6',mimeType:'image/jpeg',sizeBytes:500000,widthPx:800,heightPx:800,ownedByActor:true}],
       ['f3',{id:'f3',status:'READY',groupId:'g6',mimeType:'image/png',sizeBytes:500000,widthPx:100,heightPx:800,ownedByActor:true}],
       ['f4',{id:'f4',status:'READY',groupId:'g6',mimeType:'image/png',sizeBytes:500000,widthPx:800,heightPx:800,ownedByActor:false}]] as any);
-    const withFile = (id:string)=>evaluateCustomization(groups, [{groupCode:'cover',optionCodes:['burgundy']},{groupCode:'upload',artworkFileId:id}], files);
+    const withFile = (id:string)=>evaluateCustomization(groups, [{groupCode:'cover',optionCodes:['burgundy']},{groupCode:'upload',artworkFileId:id}], files as any);
     assert.equal(withFile('f1').ok, true);
     assert.ok(withFile('f2').issues.some(i=>i.code==='FILE_TYPE_NOT_ALLOWED'));
     assert.ok(withFile('f3').issues.some(i=>i.code==='FILE_DIMENSIONS_INVALID'));
